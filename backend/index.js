@@ -21,6 +21,7 @@ app.use(
   cors({
     origin: [
       process.env.FRONTEND_URL,
+      "https://taskapp-ceab.vercel.app",
       "https://forverceltesting.vercel.app",
       "https://forverceltesting-ih9f.vercel.app",
       "null",
@@ -63,4 +64,4 @@ const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`Server Running On Port ${PORT}`);
-});    
+});
