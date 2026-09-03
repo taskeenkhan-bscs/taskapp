@@ -1,0 +1,70 @@
+{
+  "name": "task",
+  "version": "1.0.0",
+  "description": "Task Management System Desktop Application",
+  "author": "Taskeen Ullah",
+  "private": true,
+  "type": "module",
+  "main": "electron/main.js",
+
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+
+    "electron": "electron .",
+    "electron:dev": "concurrently \"vite\" \"wait-on http://localhost:5173 && electron .\"",
+    "electron:build": "npm run build && electron-builder"
+  },
+
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.12.0",
+    "@tailwindcss/vite": "^4.3.0",
+    "axios": "^1.16.1",
+    "framer-motion": "^13.1.1",
+    "lucide-react": "^1.34.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-hot-toast": "^2.6.0",
+    "react-icons": "^5.7.0",
+    "react-redux": "^9.3.0",
+    "react-router-dom": "^7.15.1",
+    "tailwindcss": "^4.3.0"
+  },
+
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "concurrently": "^10.0.5",
+    "electron": "^44.1.0",
+    "electron-builder": "^26.15.3",
+    "eslint": "^10.3.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.6.0",
+    "vite": "^8.0.12",
+    "wait-on": "^9.1.0"
+  },
+
+  "build": {
+    "appId": "com.task.desktop",
+    "productName": "Task Management System",
+
+    "directories": {
+      "output": "release"
+    },
+
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+
+    "win": {
+      "target": "nsis"
+    }
+  }
+}
