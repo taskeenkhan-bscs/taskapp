@@ -343,12 +343,18 @@ export default function Membershowpage() {
     setTimeout(() => setToast(null), 3000);
   }
 
+  function authHeaders() {
+    const token = localStorage.getItem("token");
+    return token ? { headers: { Authorization: `Bearer ${token}` } } : {};
+  }
+
   async function getMembers() {
     try {
       setLoading(true);
-      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/members/`, {
-        withCredentials: true,
-      });
+      const res = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/members/`,
+        authHeaders()
+      );
       if (res.data.success) {
         setMembers(res.data.data || res.data.members || []);
       }
@@ -366,6 +372,7 @@ export default function Membershowpage() {
     try {
       await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/members/deletemember`, {
         data: { id },
+        ...authHeaders(),
       });
       setMembers((prev) => prev.filter((m) => m._id !== id));
       showToast("Member deleted successfully.", "success");

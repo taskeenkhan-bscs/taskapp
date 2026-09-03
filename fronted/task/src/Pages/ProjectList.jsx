@@ -491,6 +491,11 @@ export default function ProjectList() {
   // Track which project is currently being deleted
   const [deletingId, setDeletingId] = useState(null);
 
+  function authHeaders() {
+    const token = localStorage.getItem("token");
+    return token ? { headers: { Authorization: `Bearer ${token}` } } : {};
+  }
+
   // ─────────────────────────────────────────────────────────
   // Get Projects
   // ─────────────────────────────────────────────────────────
@@ -500,9 +505,7 @@ export default function ProjectList() {
       try {
         const res = await axios.get(
           `${import.meta.env.VITE_BACKEND_URL}/projects`,
-          {
-            withCredentials: true,
-          }
+          authHeaders()
         );
 
         setProjects(res.data.data);
@@ -529,7 +532,7 @@ async function deletebyid(id) {
     const res = await axios.post(
       `${import.meta.env.VITE_BACKEND_URL}/projects/delete`,
       { id },
-      { withCredentials: true }   // 👈 YE LINE ADD KARO — isके bina cookie jaati nahi
+      authHeaders()
     );
 
     console.log(res.data);
