@@ -22,6 +22,7 @@ app.use(
     origin: [
       process.env.FRONTEND_URL,
       "https://taskapp-ceab.vercel.app",
+       "https://taskapp-mauve-ten.vercel.app",
       "https://forverceltesting.vercel.app",
       "https://forverceltesting-ih9f.vercel.app",
       "null",
