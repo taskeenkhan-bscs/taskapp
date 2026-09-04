@@ -135,7 +135,7 @@ function ProjectCard({ project }) {
 // Content only — no Navbar / Footer here. Used both on the Default (home)
 // page and wrapped by the standalone /projects route page.
 // ---------------------------------------------------------------------------
-export default function ProjectsSection() {
+export default function ProjectsSection({ showAll = false }) {
   const [projects, setProjects] = useState([]);
   const [status, setStatus] = useState("loading"); // loading | success | error
   const [errorMsg, setErrorMsg] = useState("");
@@ -349,12 +349,20 @@ export default function ProjectsSection() {
             <div
               ref={scrollRef}
               onScroll={updateScrollState}
-              className="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              className={
+                showAll
+                  ? "grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                  : "flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              }
             >
               {filtered.map((project, i) => (
                 <div
                   key={project._id || project.id || i}
-                  className="w-[75%] shrink-0 snap-start sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)]"
+                  className={
+                    showAll
+                      ? "min-w-0"
+                      : "w-[75%] shrink-0 snap-start sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)]"
+                  }
                 >
                   <ProjectCard project={project} />
                 </div>

@@ -17,16 +17,26 @@ import chatRoutes from "./Routes/chatRoutes.js";
 
 const app = express();
 // Middlewares
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
+  "https://taskapp-ceab.vercel.app",
+  "https://taskapp-mauve-ten.vercel.app",
+  "https://forverceltesting.vercel.app",
+  "https://forverceltesting-ih9f.vercel.app",
+].filter(Boolean);
+
 app.use(
   cors({
-    origin: [
-      process.env.FRONTEND_URL,
-      "https://taskapp-ceab.vercel.app",
-       "https://taskapp-mauve-ten.vercel.app",
-      "https://forverceltesting.vercel.app",
-      "https://forverceltesting-ih9f.vercel.app",
-      "null",
-    ],
+    origin: (origin, callback) => {
+      if (!origin || origin === "null" || allowedOrigins.includes(origin)) {
+        callback(null, true);
+        return;
+      }
+
+      callback(new Error(`Origin ${origin} is not allowed by CORS`));
+    },
     credentials: true,
   })
 );

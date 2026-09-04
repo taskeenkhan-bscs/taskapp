@@ -1,0 +1,10 @@
+{
+  "name": "task-management-system",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix fronted/task run electron:dev",
+    "frontend": "npm --prefix fronted/task run dev",
+    "backend": "npm --prefix backend run dev",
+    "build": "npm --prefix fronted/task run electron:build"
+  }
+}

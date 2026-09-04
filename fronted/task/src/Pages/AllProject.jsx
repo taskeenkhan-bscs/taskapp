@@ -7,7 +7,7 @@ export default function AllProjects() {
   return (
     <>
       <Navbar />
-      <ProjectsSection />
+      <ProjectsSection showAll />
       <Footer />
     </>
   );
